@@ -10,9 +10,7 @@ public class Main {
         mostrarCarrito(carrito);
     }
 
-    public static int definirNumeroAleatorioEntre(int min, int max){
-        return (int) (Math.random() * ((max + 1) - min)) + min;
-    }
+
 
     public static void llenarPrecios(int[][] carrito){
         for (int i=0; i<carrito.length; i++){
@@ -36,7 +34,23 @@ public class Main {
         System.out.println("El carrito contiene " + calcularCantidadProductos(carrito) + " productos.");
     }
 
-    public static int calcularCantidadProductos(int[][] carrito){
+    public static int calcularCompraTotal(int[][] carrito){
+        int acumulador = 0;
+
+        for (int i=0; i<carrito.length; i++){
+            for (int j=1; j<carrito[0].length; j++){
+                acumulador += carrito[i][j];
+            }
+        }
+
+        return acumulador;
+    }
+
+    private static int definirNumeroAleatorioEntre(int min, int max){
+        return (int) (Math.random() * ((max + 1) - min)) + min;
+    }
+
+    private static int calcularCantidadProductos(int[][] carrito){
         int acumulador = 0;
 
         for (int i=0; i<carrito.length; i++){
@@ -50,7 +64,7 @@ public class Main {
         return acumulador;
     }
 
-    public static void mostrarCarrito(int[][] carrito){
+    private static void mostrarCarrito(int[][] carrito){
         for (int i=0; i<carrito.length; i++){
             for (int j=0; j<carrito[0].length; j++){
                 System.out.print(carrito[i][j] + " ");
