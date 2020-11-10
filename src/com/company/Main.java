@@ -4,7 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
         int carrito[][] = new int[definirNumeroAleatorioEntre(1,20)][16];    //de 0 a 15 productos cada  celda
-
+        llenarPrecios(carrito);
+        llenarCarrito(carrito);
+        imprimirCantidadProductos(carrito);
+        mostrarCarrito(carrito);
     }
 
     public static int definirNumeroAleatorioEntre(int min, int max){
@@ -29,8 +32,22 @@ public class Main {
         }
     }
 
-    public static void imprimirCantidadProductos(){
+    public static void imprimirCantidadProductos(int[][] carrito){
+        System.out.println("El carrito contiene " + calcularCantidadProductos(carrito) + " productos.");
+    }
 
+    public static int calcularCantidadProductos(int[][] carrito){
+        int acumulador = 0;
+
+        for (int i=0; i<carrito.length; i++){
+            for (int j=1; j<carrito[0].length; j++){
+                if(carrito[i][j] > 0){
+                    acumulador++;
+                }
+            }
+        }
+
+        return acumulador;
     }
 
     public static void mostrarCarrito(int[][] carrito){
