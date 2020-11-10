@@ -7,10 +7,21 @@ public class Main {
         llenarPrecios(carrito);
         llenarCarrito(carrito);
         imprimirCantidadProductos(carrito);
-        mostrarCarrito(carrito);
+        imprimirDetallesCarrito(carrito);
     }
 
+    public static void imprimirDetallesCarrito(int[][] carrito){
+        for (int i=0; i<carrito.length; i++){
+            imprimirDetallesCeldaCarrito(carrito,i);
+        }
+        System.out.println("Total de compra: $" + calcularCompraTotal(carrito));
+    }
 
+    public static void imprimirDetallesCeldaCarrito(int[][] carrito, int posicion){
+        System.out.println("Cantidad producto [" + posicion + "]: " +
+                calcularSubCantidadProductos(carrito,posicion) + ", Subtotal: $" +
+                calcularSubTotal(carrito,posicion));
+    }
 
     public static void llenarPrecios(int[][] carrito){
         for (int i=0; i<carrito.length; i++){
@@ -24,9 +35,9 @@ public class Main {
         }
     }
 
-    public static void agregarProductos(int[][] carrito, int posicionPrecio, int cantidad){
+    private static void agregarProductos(int[][] carrito, int posicionPrecio, int cantidad){
         for (int j=1; j<(cantidad + 1); j++){
-            carrito[posicionPrecio][j] = carrito[posicionPrecio][0];  //asd
+            carrito[posicionPrecio][j] = carrito[posicionPrecio][0];
         }
     }
 
@@ -38,9 +49,17 @@ public class Main {
         int acumulador = 0;
 
         for (int i=0; i<carrito.length; i++){
-            for (int j=1; j<carrito[0].length; j++){
-                acumulador += carrito[i][j];
-            }
+            acumulador += calcularSubTotal(carrito,i);
+        }
+
+        return acumulador;
+    }
+
+    public static int calcularSubTotal(int[][] carrito, int posicion){
+        int acumulador = 0;
+
+        for (int j=1; j<carrito[0].length; j++){
+            acumulador += carrito[posicion][j];
         }
 
         return acumulador;
@@ -54,22 +73,21 @@ public class Main {
         int acumulador = 0;
 
         for (int i=0; i<carrito.length; i++){
-            for (int j=1; j<carrito[0].length; j++){
-                if(carrito[i][j] > 0){
-                    acumulador++;
-                }
-            }
+            acumulador += calcularSubCantidadProductos(carrito, i);
         }
 
         return acumulador;
     }
 
-    private static void mostrarCarrito(int[][] carrito){
-        for (int i=0; i<carrito.length; i++){
-            for (int j=0; j<carrito[0].length; j++){
-                System.out.print(carrito[i][j] + " ");
+    private static int calcularSubCantidadProductos(int[][] carrito, int posicion){
+        int acumulador = 0;
+
+        for (int j=1; j<carrito[0].length; j++){
+            if(carrito[posicion][j] > 0){
+                acumulador++;
             }
-            System.out.println();
         }
+
+        return acumulador;
     }
 }
