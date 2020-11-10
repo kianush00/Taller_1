@@ -7,13 +7,14 @@ public class Main {
         llenarPrecios(carrito);
         llenarCarrito(carrito);
         imprimirCantidadProductos(carrito);
-        imprimirCarrito(carrito);
+        imprimirDetallesCarrito(carrito);
     }
 
     public static void imprimirDetallesCarrito(int[][] carrito){
         for (int i=0; i<carrito.length; i++){
             imprimirDetallesCeldaCarrito(carrito,i);
         }
+        System.out.println("Total de compra: $" + calcularCompraTotal(carrito));
     }
 
     public static void imprimirDetallesCeldaCarrito(int[][] carrito, int posicion){
@@ -48,7 +49,7 @@ public class Main {
         int acumulador = 0;
 
         for (int i=0; i<carrito.length; i++){
-            acumulador = calcularSubTotal(carrito,i);
+            acumulador += calcularSubTotal(carrito,i);
         }
 
         return acumulador;
@@ -72,7 +73,7 @@ public class Main {
         int acumulador = 0;
 
         for (int i=0; i<carrito.length; i++){
-            acumulador = calcularSubCantidadProductos(carrito, i);
+            acumulador += calcularSubCantidadProductos(carrito, i);
         }
 
         return acumulador;
@@ -88,14 +89,5 @@ public class Main {
         }
 
         return acumulador;
-    }
-
-    private static void imprimirCarrito(int[][] carrito){
-        for (int i=0; i<carrito.length; i++){
-            for (int j=0; j<carrito[0].length; j++){
-                System.out.print(carrito[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 }
