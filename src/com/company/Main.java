@@ -26,7 +26,7 @@ public class Main {
 
     public static void agregarProductos(int[][] carrito, int posicionPrecio, int cantidad){
         for (int j=1; j<(cantidad + 1); j++){
-            carrito[posicionPrecio][j] = carrito[posicionPrecio][0];
+            carrito[posicionPrecio][j] = carrito[posicionPrecio][0];  //asd
         }
     }
 
